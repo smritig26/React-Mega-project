@@ -1,4 +1,4 @@
-import conf from "../conf.js";
+import conf from "../conf/conf.js";
 import {Client , Account , ID} from "appwrite"
 export class AuthService{
     client = new Client();
@@ -7,7 +7,7 @@ export class AuthService{
     constructor(){
         this.client
             .setEndpoint(conf.appwriteUrl)
-            .setProject(confappwriteProjectId);
+            .setProject(conf.appwriteProjectId);
         this.account = new Account(this.client);
     }
 
@@ -25,7 +25,7 @@ export class AuthService{
         }
     }
 
-    async login(){
+    async login({ email, password }){
         try {
             return await this.account.createEmailPasswordSession(email , password);
         } catch (error) {
@@ -39,7 +39,7 @@ export class AuthService{
         } catch (error) {
             throw error;
         }
-        return null;
+        // return null;
     }
 
 
